@@ -268,6 +268,7 @@ export default function SubmitProject() {
           )}
         </div>
       </div>
+      {error && <ErrorMessage message={error} onClose={() => setError(null)} />}
     </section>
   );
 }

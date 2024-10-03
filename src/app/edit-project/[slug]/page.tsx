@@ -12,7 +12,7 @@ import ErrorMessage from '@/components/ErrorMessage';
 import { FaGithub, FaGlobe, FaTwitter, FaSpinner } from 'react-icons/fa';
 
 // Define a type that includes all expected properties
-type ProjectData = {
+export type ProjectData = {
     id: string;
     Name: string;
     Tagline?: string;

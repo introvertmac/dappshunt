@@ -9,8 +9,18 @@ const base = new Airtable({ apiKey: process.env.NEXT_PUBLIC_AIRTABLE_API_KEY }).
   process.env.NEXT_PUBLIC_AIRTABLE_BASE_ID!
 );
 
+interface Project {
+  id: string;
+  Name: string;
+  Tagline: string;
+  Status: string;
+  Slug: string;
+  'Funding Goal': number;
+  'Funds Raised': number;
+}
+
 export default function ExploreProjects() {
-  const [projects, setProjects] = useState<any[]>([]);
+  const [projects, setProjects] = useState<Project[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -19,7 +29,7 @@ export default function ExploreProjects() {
       .select({ filterByFormula: `{Status} = 'Approved'` })
       .all()
       .then((records) => {
-        setProjects(records.map((record) => record.fields as any));
+        setProjects(records.map((record) => record.fields as unknown as Project));
         setIsLoading(false);
       })
       .catch((error) => {

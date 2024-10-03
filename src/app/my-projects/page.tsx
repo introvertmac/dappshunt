@@ -122,7 +122,7 @@ export default function MyProjects() {
         </div>
       ) : projects.length === 0 ? (
         <div className="bg-white shadow-md rounded-lg p-6 sm:p-8 text-center">
-          <p className="text-xl mb-4">You haven't submitted any projects yet.</p>
+          <p className="text-xl mb-4">You haven&apos;t submitted any projects yet.</p>
           <Link href="/submit-project">
             <button className="px-4 py-2 bg-coinbase-blue text-white rounded-md hover:bg-coinbase-darkBlue transition duration-300">
               Submit Your First Project
