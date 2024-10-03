@@ -1,101 +1,85 @@
-import Image from "next/image";
+// src/app/page.tsx
+import Link from 'next/link';
+import Image from 'next/image';
+import { FaSearch, FaHandHoldingUsd, FaLock } from 'react-icons/fa';
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+    <div className="bg-white">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col lg:flex-row items-center justify-between py-20 sm:py-32">
+          <div className="text-center lg:text-left lg:w-1/2">
+            <h1 className="text-4xl sm:text-6xl font-extrabold text-gray-900 mb-4">
+              <span className="block text-coinbase-blue">Discover and Support</span>
+              <span className="block">Innovative Solana Projects</span>
+            </h1>
+            <p className="mt-3 max-w-md mx-auto lg:mx-0 text-base sm:text-lg text-gray-500 sm:mt-5 md:mt-5 md:text-xl">
+              Dappshunt is the premier platform for discovering, supporting, and launching
+              cutting-edge projects on the Solana blockchain.
+            </p>
+            <div className="mt-10 sm:mt-12 flex flex-col sm:flex-row justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
+              <Link
+                href="/explore-projects"
+                className="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-coinbase-blue hover:bg-coinbase-darkBlue md:py-4 md:text-lg md:px-10 transition duration-150 ease-in-out"
+              >
+                Explore Projects
+              </Link>
+              <Link
+                href="/submit-project"
+                className="inline-flex items-center justify-center px-8 py-3 border border-coinbase-blue text-base font-medium rounded-md text-coinbase-blue bg-white hover:bg-coinbase-lightBlue md:py-4 md:text-lg md:px-10 transition duration-150 ease-in-out"
+              >
+                Submit Project
+              </Link>
+            </div>
+          </div>
+          <div className="mt-10 lg:mt-0 lg:w-1/2">
             <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+              src="https://images.unsplash.com/photo-1639322537228-f710d846310a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80"
+              alt="Innovative Solana Projects"
+              width={800}
+              height={600}
+              className="w-full h-auto rounded-lg shadow-lg"
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          </div>
+        </div>
+        
+        <div className="mt-20 sm:mt-32">
+          <h2 className="text-3xl sm:text-4xl font-bold text-center text-gray-900 mb-8">Why Choose Dappshunt?</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              { title: 'Curated Projects', description: 'Discover high-quality, vetted Solana projects.', icon: FaSearch },
+              { title: 'Easy Support', description: 'Contribute to projects with just a few clicks.', icon: FaHandHoldingUsd },
+              { title: 'Blockchain Powered', description: 'Secure and transparent transactions on Solana.', icon: FaLock },
+            ].map((feature, index) => (
+              <div key={index} className="bg-coinbase-lightBlue rounded-lg p-6 flex flex-col items-center text-center">
+                <feature.icon className="w-12 h-12 text-coinbase-blue mb-4" />
+                <h3 className="text-xl font-semibold text-coinbase-darkBlue mb-2">{feature.title}</h3>
+                <p className="text-gray-600">{feature.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+        
+        <div className="mt-20 sm:mt-32 text-center pb-20 sm:pb-32 relative">
+          <div className="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none">
+            <Image src="/solana-logo-bg.svg" alt="Solana Logo" width={800} height={800} />
+          </div>
+          <div className="relative z-10">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Ready to Explore?</h2>
+            <p className="mt-3 max-w-md mx-auto text-base sm:text-lg text-gray-500 sm:mt-5 sm:max-w-xl sm:mx-auto">
+              Discover innovative projects and be part of the Solana ecosystem's growth.
+            </p>
+            <div className="mt-8">
+              <Link
+                href="/explore-projects"
+                className="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-coinbase-green hover:bg-green-600 md:py-4 md:text-lg md:px-10 transition duration-150 ease-in-out"
+              >
+                Start Exploring
+              </Link>
+            </div>
+          </div>
         </div>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
     </div>
   );
 }

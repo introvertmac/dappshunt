@@ -1,36 +1,87 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Dappshunt Project Submission Platform
+
+## Overview
+
+Dappshunt is a platform that allows users to submit, edit, and explore projects built on the Solana blockchain. Users can connect their wallets, manage their projects, and engage with the community.
+
+## Features
+
+- **Submit Projects**: Users can submit new projects with details such as name, tagline, description, funding goals, and relevant links (GitHub, demo, social media).
+- **Edit Projects**: Users can edit their submitted projects, updating any details as needed.
+- **Explore Projects**: Users can explore projects submitted by others, viewing details and funding progress.
+- **Wallet Integration**: Users can connect their Solana wallets to manage their projects securely.
+- **Donation System**: Users can donate to projects directly through the platform.
+
+## Technologies Used
+
+- **Frontend**: React, Next.js
+- **State Management**: React Hooks
+- **UI Components**: Tailwind CSS for styling, React Icons for icons
+- **Database**: Airtable for storing project data
+- **Blockchain**: Solana for wallet integration and transactions
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Node.js and npm installed on your machine.
+- A Solana wallet (e.g., Phantom) for testing.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/dappshunt.git
+   cd dappshunt
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-## Learn More
+3. Set up environment variables:
+   Create a `.env.local` file in the root directory and add your Airtable API key and base ID:
+   ```plaintext
+   NEXT_PUBLIC_AIRTABLE_API_KEY=your_airtable_api_key
+   NEXT_PUBLIC_AIRTABLE_BASE_ID=your_airtable_base_id
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+4. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+5. Open your browser and navigate to `http://localhost:3000`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Usage
 
-## Deploy on Vercel
+### Submitting a Project
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Connect your wallet using the "Connect Wallet" button.
+2. Fill in the project submission form with the required details.
+3. Click "Submit Project" to save your project to the database.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Editing a Project
+
+1. Navigate to "My Projects" to view your submitted projects.
+2. Click on the "Edit Project" button for the project you wish to modify.
+3. Update the project details and click "Update Project" to save changes.
+
+### Exploring Projects
+
+1. Navigate to the "Explore Projects" page to view all approved projects.
+2. Click on a project to view its details, including funding progress and description.
+
+## Contributing
+
+Contributions are welcome! If you have suggestions for improvements or new features, please open an issue or submit a pull request.
+
+## License
+
+This project is licensed under the MIT License. See the LICENSE file for more details.
+
+## Acknowledgments
+
+- Thanks to the Superteam India community for their support and resources.
+
