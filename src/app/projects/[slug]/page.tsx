@@ -74,7 +74,7 @@ export default function ProjectPage() {
 
       // Check if recipient ATA exists, if not, create it
       const recipientATAInfo = await connection.getAccountInfo(recipientATA);
-      let transaction = new Transaction();
+      const transaction = new Transaction();
 
       if (!recipientATAInfo) {
         const createATAInstruction = createAssociatedTokenAccountInstruction(

@@ -138,6 +138,10 @@ export default function EditProject() {
         }
     };
 
+    const handleCancel = () => {
+        router.back();
+    };
+
     if (!wallet.connected) {
         return (
             <section className="p-4 sm:p-8 max-w-4xl mx-auto">
@@ -228,13 +232,22 @@ export default function EditProject() {
                         value={formData['Use of Funds']}
                         onChange={handleChange}
                     />
-                    <button
-                        onClick={handleSubmit}
-                        className="w-full bg-coinbase-blue text-white px-4 py-2 rounded hover:bg-coinbase-darkBlue transition duration-300"
-                        disabled={isSubmitting}
-                    >
-                        {isSubmitting ? 'Submitting...' : 'Update Project'}
-                    </button>
+                    <div className="flex space-x-4">
+                        <button
+                            onClick={handleSubmit}
+                            className="w-1/2 bg-coinbase-blue text-white px-4 py-2 rounded hover:bg-coinbase-darkBlue transition duration-300"
+                            disabled={isSubmitting}
+                        >
+                            {isSubmitting ? 'Submitting...' : 'Update Project'}
+                        </button>
+                        <button
+                            onClick={handleCancel}
+                            className="w-1/2 bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400 transition duration-300"
+                            disabled={isSubmitting}
+                        >
+                            Cancel
+                        </button>
+                    </div>
                 </div>
             </div>
         </section>

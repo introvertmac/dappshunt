@@ -67,7 +67,7 @@ export default function Home() {
           <div className="relative z-10">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Ready to Explore?</h2>
             <p className="mt-3 max-w-md mx-auto text-base sm:text-lg text-gray-500 sm:mt-5 sm:max-w-xl sm:mx-auto">
-              Discover innovative projects and be part of the Solana ecosystem's growth.
+              Discover innovative projects and be part of the Solana ecosystem&apos;s growth.
             </p>
             <div className="mt-8">
               <Link
