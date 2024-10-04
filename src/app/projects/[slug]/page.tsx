@@ -29,6 +29,7 @@ export default function ProjectPage() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [copiedWallet, setCopiedWallet] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
   useEffect(() => {
     if (slug) {
@@ -62,6 +63,8 @@ export default function ProjectPage() {
     }
 
     setIsDonating(true);
+    setError(null);
+    setSuccessMessage(null);
 
     try {
       const donorPublicKey = wallet.publicKey;
@@ -107,25 +110,35 @@ export default function ProjectPage() {
       const txid = await connection.sendRawTransaction(signedTransaction.serialize());
       await connection.confirmTransaction(txid, 'confirmed');
 
-      alert('Donation successful!');
+      // Fetch the latest project data
+      const records = await base('Projects').select({
+        filterByFormula: `{Slug} = '${slug}'`
+      }).firstPage();
 
-      // Update Airtable
-      const newFundsRaised = Number(project['Funds Raised']) + Number(donationAmount);
-      try {
+      if (records && records.length > 0) {
+        const updatedProject = records[0];
+        const currentFundsRaised = Number(updatedProject.fields['Funds Raised'] || 0);
+        const newFundsRaised = currentFundsRaised + donationAmount;
+
         await base('Projects').update([
           {
-            id: project.id,
+            id: updatedProject.id,
             fields: {
-              'Funds Raised': newFundsRaised,
+              'Funds Raised': newFundsRaised, // Send as a number, not a string
             },
           },
         ]);
-      } catch (error) {
-        console.error('Airtable update error:', error);
-        throw error; // Re-throw the error to be caught by the outer try-catch
+
+        // Update local state
+        setProject({ ...updatedProject.fields, id: updatedProject.id, 'Funds Raised': newFundsRaised });
+        setDonationAmount(0);
+
+        // Set success message
+        setSuccessMessage('Donation successful! Thank you for your support.');
+      } else {
+        throw new Error('Project not found');
       }
 
-      setProject({ ...project, 'Funds Raised': newFundsRaised });
     } catch (error) {
       console.error('Error processing donation:', error);
       setError('Failed to process donation. Please try again.');
@@ -157,6 +170,23 @@ export default function ProjectPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
       {error && <ErrorMessage message={error} onClose={() => setError(null)} />}
+      {successMessage && (
+        <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
+          <span className="block sm:inline">{successMessage}</span>
+          <span className="absolute top-0 bottom-0 right-0 px-4 py-3">
+            <svg
+              className="fill-current h-6 w-6 text-green-500"
+              role="button"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              onClick={() => setSuccessMessage(null)}
+            >
+              <title>Close</title>
+              <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" />
+            </svg>
+          </span>
+        </div>
+      )}
       
       <h1 className="text-3xl font-bold mb-4">{project.Name}</h1>
       <p className="text-xl text-gray-600 mb-6">{project.Tagline}</p>
