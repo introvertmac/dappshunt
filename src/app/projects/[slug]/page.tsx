@@ -10,6 +10,7 @@ import { TOKEN_PROGRAM_ID, getAssociatedTokenAddress, createTransferInstruction,
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import { FaGithub, FaGlobe, FaTwitter, FaWallet, FaSpinner, FaCopy, FaDollarSign } from 'react-icons/fa';
 import ErrorMessage from '@/components/ErrorMessage';
+import Image from 'next/image';
 
 const base = new Airtable({ apiKey: process.env.NEXT_PUBLIC_AIRTABLE_API_KEY }).base(
   process.env.NEXT_PUBLIC_AIRTABLE_BASE_ID!
@@ -26,7 +27,13 @@ const BuyUSDCButton = () => (
     rel="noopener noreferrer"
     className="flex-1 bg-coinbase-green text-white px-4 py-2 rounded hover:bg-green-600 transition duration-300 flex items-center justify-center"
   >
-    <FaDollarSign className="mr-2" />
+    <Image
+      src="/images/mercuryo-logo.png"
+      alt="Mercuryo"
+      width={24}
+      height={24}
+      className="mr-2"
+    />
     Buy USDC
   </a>
 );
