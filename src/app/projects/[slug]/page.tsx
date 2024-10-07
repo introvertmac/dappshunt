@@ -8,7 +8,7 @@ import { useWallet, useConnection } from '@solana/wallet-adapter-react';
 import { PublicKey, Transaction } from '@solana/web3.js';
 import { TOKEN_PROGRAM_ID, getAssociatedTokenAddress, createTransferInstruction, createAssociatedTokenAccountInstruction } from '@solana/spl-token';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
-import { FaGithub, FaGlobe, FaTwitter, FaWallet, FaSpinner, FaCopy } from 'react-icons/fa';
+import { FaGithub, FaGlobe, FaTwitter, FaWallet, FaSpinner, FaCopy, FaDollarSign } from 'react-icons/fa';
 import ErrorMessage from '@/components/ErrorMessage';
 
 const base = new Airtable({ apiKey: process.env.NEXT_PUBLIC_AIRTABLE_API_KEY }).base(
@@ -18,6 +18,18 @@ const base = new Airtable({ apiKey: process.env.NEXT_PUBLIC_AIRTABLE_API_KEY }).
 const USDC_DECIMALS = 6;
 const USDC_MINT_ADDRESS = '4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU'; // Devnet USDC mint address
 const USDC_MINT = new PublicKey(USDC_MINT_ADDRESS);
+
+const BuyUSDCButton = () => (
+  <a
+    href="https://exchange.mercuryo.io/?widget_id=56153e86-067e-4f5e-a407-6a1d9e040058&type=buy&currency=USDC&network=SOLANA&amount=50&fiat_currency=USD"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="flex-1 bg-coinbase-green text-white px-4 py-2 rounded hover:bg-green-600 transition duration-300 flex items-center justify-center"
+  >
+    <FaDollarSign className="mr-2" />
+    Buy USDC
+  </a>
+);
 
 export default function ProjectPage() {
   const { slug } = useParams();
@@ -274,21 +286,26 @@ export default function ProjectPage() {
           </button>
         </div>
 
-        {wallet.connected ? (
-          <div className="flex justify-between items-center">
-            <span className="text-sm text-gray-600">
-              Connected: {wallet.publicKey?.toString().slice(0, 4)}...{wallet.publicKey?.toString().slice(-4)}
-            </span>
-            <button
-              onClick={() => wallet.disconnect()}
-              className="text-sm text-red-500 hover:text-red-700 transition duration-300"
-            >
-              Disconnect
-            </button>
-          </div>
-        ) : (
-          <WalletMultiButton className="w-full bg-coinbase-blue text-white px-4 py-2 rounded hover:bg-coinbase-darkBlue transition duration-300" />
-        )}
+        <div className="mt-6">
+          {wallet.connected ? (
+            <div className="flex justify-between items-center">
+              <span className="text-sm text-gray-600">
+                Connected: {wallet.publicKey?.toString().slice(0, 4)}...{wallet.publicKey?.toString().slice(-4)}
+              </span>
+              <button
+                onClick={() => wallet.disconnect()}
+                className="text-sm text-red-500 hover:text-red-700 transition duration-300"
+              >
+                Disconnect
+              </button>
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 gap-4">
+              <WalletMultiButton className="w-full bg-coinbase-blue text-white px-4 py-2 rounded hover:bg-coinbase-darkBlue transition duration-300 flex items-center justify-center" />
+              <BuyUSDCButton />
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
